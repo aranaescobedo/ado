@@ -35,12 +35,12 @@ $getRootDir = git rev-parse --show-toplevel
 Set-Location $getRootDir\<FILE_PATH>
 
 $extensionName = "AADSSHLoginForLinux"
-$vnetName = ""
 $resouceGroupName = ""
 $routeTableName = ""
 $subnetName = ""
 $subscriptionName = ""
 $vmScaleName = ""
+$vnetName = ""
 
 "[*] Set environment:"
 az account set --subscription $subscriptionName
@@ -74,7 +74,7 @@ az vmss create `
 --subnet $subnetName `
 --upgrade-policy-mode manual `
 --vm-sku Standard_D4s_v3 `
---vnet-name $mgmtVnetName
+--vnet-name $vnetName
 
 "[*] Install extension $extensionName"
 az vmss extension set `
