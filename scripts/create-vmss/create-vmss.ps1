@@ -2,7 +2,7 @@
     .DESCRIPTION
         This script will create a VM scale set and subnet to be used as Azure DevOps agents.
         AADSSHLoginForLinux is enabled, allowing you to log into the VM instance with Azure AD.
-        Ensure that the user has one of the permissions mentioned below to utilize the extension 
+        Ensure that the user has one of the roles mentioned below to utilize the extension 
         
         - Virtual Machine Administrator Login: Users who have this role assigned can log in to an Azure virtual machine with administrator privileges.
         - Virtual Machine User Login: Users who have this role assigned can log in to an Azure virtual machine with regular user privileges.
