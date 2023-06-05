@@ -21,4 +21,4 @@ Please note that this is provided as-is and may not suit all use cases. Use at y
 
 [azure-account]: https://azure.microsoft.com/en-us/free
 [azure-cli]: https://docs.microsoft.com/en-us/cli/azure
-[create-vmss.ps1]:scripts/create-vmss.ps1
+[create-vmss.ps1]:scripts/create-vmss/create-vmss.ps1
