@@ -11,10 +11,11 @@
         Attention: You may need to run 'az logout' and 'az login' to ensure that you have the latest permissions.
         1. Install extension on your local machine -> az extension add --name ssh
         2. az ssh vm --ip <IP>
-
+        
         Source:
         https://learn.microsoft.com/en-us/azure/active-directory/devices/howto-vm-sign-in-azure-ad-linux#connect-to-vms-in-virtual-machine-scale-sets
         https://learn.microsoft.com/en-us/azure/active-directory/devices/howto-vm-sign-in-azure-ad-linux
+        https://ubuntu.com/server/docs/find-ubuntu-images-on-azure
 
     .NOTES
         AUTHOR: Alexander Arana E
