@@ -11,7 +11,7 @@
 
 ## File Descriptions
 
-- **[ghasado-webapp-dotnet]**: XXX.
+- **[ghasado-webapp-dotnet]**: A NET 7 web app comes with a CodeQL installation pipeline, enabling GitHub Advanced Security on self-hosted Linux agents in Azure DevOps.
   
 - **[create-vmss.ps1]**: The script creates a VM scale set and subnet for Azure DevOps agents, enabling Azure AD SSH login and providing steps to install the necessary extensions and connect to the VM instances.
 
