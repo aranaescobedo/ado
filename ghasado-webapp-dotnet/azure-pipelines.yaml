@@ -35,7 +35,7 @@ steps:
         "[*] Step 3: Create an empty file"
         New-Item -Path $completeFilePath -ItemType File -Force
 
-        #"[*] Cleanup: Remove the downloaded zip file"
+        "[*] Cleanup: Remove the downloaded zip file"
         Remove-Item -Path $codeqlBundleTarGzPath
 
   - task: AdvancedSecurity-Codeql-Init@1
