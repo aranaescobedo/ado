@@ -13,7 +13,6 @@ steps:
     displayName: Install CodeQl bundle
     inputs:
       targetType: 'inline'
-      #workingDirectory: '$(Agent.HomeDirectory)'
       script: |
     
         "[*] Define variables"
