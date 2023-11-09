@@ -22,7 +22,12 @@ git commit -am "initial commit"
 git push --set-upstream origin main
 ```
 
-## Setting up Git to authenticate with GitHub when you have 2-factor authentication enabled
+## Setting up Git to authenticate with GitHub when you have 2-factor authentication enabled with GitHub CLI
+I have had some problems authenticating against GitHub with a new email address. What I did was follow the steps below to solve the issue.
+
+1. [How to logout from git in windows](https://medium.com/@devesu/how-to-logout-from-git-in-windows-e17c66fe9ca8)
+2. [Install GitHub CLI](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git#platform-windows)
+
 
 ### Source:
 [Configure GitHub Advanced Security for Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml)
@@ -31,6 +36,3 @@ git push --set-upstream origin main
 
 [Instructions for setting up git to authenticate with GitHub when you have 2-factor authentication set up](https://gist.github.com/ateucher/4634038875263d10fb4817e5ad3d332f)
 
-[How to logout from git in windows](https://medium.com/@devesu/how-to-logout-from-git-in-windows-e17c66fe9ca8)
-
-[Caching your GitHub credentials in Git](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git#platform-windows)
