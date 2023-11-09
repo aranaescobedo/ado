@@ -61,7 +61,7 @@ az vmss create `
 --disable-overprovision `
 --ephemeral-os-disk true `
 --generate-ssh-keys `
---image Ubuntu2204 `
+--image Canonical:0001-com-ubuntu-server-jammy:22_04-lts:latest `
 --instance-count 1 `
 --load-balancer '""' `
 --name $vmScaleName `
@@ -83,3 +83,15 @@ az vmss extension set `
 --publisher Microsoft.Azure.ActiveDirectory `
 --resource-group $resouceGroupName `
 --vmss-name $vmScaleName
+
+"[*] Give ar-vmss Virtual Machine Contributor permission"
+$vmssId = az vmss show `
+--name  $vmScaleName `
+--resource-group $resouceGroupName   `
+--query "id" -o tsv
+
+$objectId = az ad sp list --display-name $appregistrationName --query "[].id" -o tsv
+az role assignment create `
+--assignee $objectId `
+--role "Virtual Machine Contributor" `
+--scope $vmssId
