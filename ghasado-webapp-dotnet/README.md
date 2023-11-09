@@ -1,3 +1,6 @@
+# 🚀Getting Started
+Here are some steps to follow if you are a little bit unsure about how to create a basic .NET application and push the code to Azure DevOps. Enjoy!
+
 ## Create a .NET 7 web application
 ```powershell
 
