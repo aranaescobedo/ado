@@ -35,6 +35,7 @@ param(
 $getRootDir = git rev-parse --show-toplevel
 Set-Location "$getRootDir\<FILE_PATH>" #The placeholder <FILE_PATH> represents the file path or directory where the script is located within your Git repository.
 
+$appregistrationName = ""
 $extensionName = "AADSSHLoginForLinux"
 $resouceGroupName = ""
 $routeTableName = ""
