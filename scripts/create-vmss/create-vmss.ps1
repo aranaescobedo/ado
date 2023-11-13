@@ -35,6 +35,7 @@ param(
 $getRootDir = git rev-parse --show-toplevel
 Set-Location "$getRootDir\<FILE_PATH>" #The placeholder <FILE_PATH> represents the file path or directory where the script is located within your Git repository.
 
+$adminEmail = ""
 $appregistrationName = ""
 $extensionName = "AADSSHLoginForLinux"
 $resouceGroupName = ""
@@ -79,6 +80,24 @@ az vmss create `
 --vm-sku Standard_D4s_v3 `
 --vnet-name $vnetName
 
+"[*] Get VMSS ID"
+$vmssId = az vmss show `
+--name  $vmScaleName `
+--resource-group $resouceGroupName   `
+--query "id" -o tsv
+
+"[*] Give Admin user (email) Virtual Machine Administrator Login permission"
+$userObjectId = az ad user show --id $adminEmail --query objectId
+az role assignment create `
+--assignee $userObjectId `
+--role "Virtual Machine Administrator Login" `
+--scope $vmssId
+
+az role assignment create `
+--assignee $objectId `
+--role "Virtual Machine Contributor" `
+--scope $vmssId
+
 "[*] Install extension $extensionName"
 az vmss extension set `
 --name $extensionName `
@@ -86,12 +105,7 @@ az vmss extension set `
 --resource-group $resouceGroupName `
 --vmss-name $vmScaleName
 
-"[*] Give ar-vmss Virtual Machine Contributor permission"
-$vmssId = az vmss show `
---name  $vmScaleName `
---resource-group $resouceGroupName   `
---query "id" -o tsv
-
+"[*] Give App registration Virtual Machine Contributor permission"
 $objectId = az ad sp list --display-name $appregistrationName --query "[].id" -o tsv
 az role assignment create `
 --assignee $objectId `
