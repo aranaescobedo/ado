@@ -26,7 +26,7 @@ runcmd:
   #Install Azure CLI
   - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-   # CodeQL Installation
+  # CodeQL Installation
   - codeqlReleaseBundleTag="codeql-bundle-v2.15.1" 
   - agentToolDirectory="/agent/_work/_tool"
   - codeqlDirectory="$agentToolDirectory/CodeQL"
@@ -46,14 +46,14 @@ runcmd:
   - apt-get update
   - apt-get install -y docker-ce docker-ce-cli containerd.io
 
-  #Enable Docker BuildKit
+  # Enable Docker BuildKit
   - echo '{"features":{"buildkit":true}}' > /etc/docker/daemon.json
   - systemctl restart docker
 
-  #Install Docker Compose
+  # Install Docker Compose
   - apt-get install -y docker-compose
 
-  #Install PowerShell Core
+  # Install PowerShell Core
   - apt-get install -y wget
   - wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
   - dpkg -i packages-microsoft-prod.deb
