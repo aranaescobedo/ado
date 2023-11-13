@@ -23,6 +23,21 @@ packages:
 
 #Run custom commands
 runcmd:
+  #Install Azure CLI
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+   # CodeQL Installation
+  - codeqlReleaseBundleTag="codeql-bundle-v2.15.1" 
+  - agentToolDirectory="/agent/_work/_tool"
+  - codeqlDirectory="$agentToolDirectory/CodeQL"
+  - codeqlVersionedDirectory="$codeqlDirectory/0.0.0-$codeqlReleaseBundleTag/x64"
+  - codeqlBundleTarGzPath="$agentToolDirectory/codeql-bundle.tar.gz"
+  - codeqlReleaseUrl="https://github.com/github/codeql-action/releases/download/$codeqlReleaseBundleTag/codeql-bundle-linux64.tar.gz"
+  - sudo mkdir -p $codeqlVersionedDirectory
+  - sudo wget $codeqlReleaseUrl -O $codeqlBundleTarGzPath
+  - sudo tar -xvzf $codeqlBundleTarGzPath -C $codeqlVersionedDirectory
+  - sudo touch $codeqlDirectory/0.0.0-$codeqlReleaseBundleTag/x64.complete
+
   # Install Docker
   - apt-get update
   - apt-get install -y apt-transport-https ca-certificates curl software-properties-common
@@ -45,8 +60,3 @@ runcmd:
   - apt-get update
   - apt-get install -y powershell
 
-  #Install Azure CLI
-  - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-
-#Echo output to verify completion
-  - echo "Installation complete" > /home/<username>/setup-complete.txt
