@@ -58,6 +58,7 @@ az network vnet subnet create `
 az vmss create `
 --admin-username azureuser `
 --assign-identity `
+--custom-data cloud-init.txt `
 --disable-overprovision `
 --ephemeral-os-disk true `
 --generate-ssh-keys `
