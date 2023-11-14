@@ -1,4 +1,4 @@
-# Install CodeQL in Azure pipeline or VM scale set
+# 🛡️Install CodeQL in Azure pipeline or VM scale set
 Navigate to the [pipeline](azure-pipelines.yaml) for guidance on installing CodeQL on your self-hosted agents. Additionally, you can install CodeQL directly on an Azure VM Scale Set using this [cloud-init script](../scripts/create-vmss/cloud-init.txt).
 
 ## 🚀Getting Started
