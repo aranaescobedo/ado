@@ -87,7 +87,7 @@ $vmssId = az vmss show `
 --query "id" -o tsv
 
 "[*] Give Admin user (email) Virtual Machine Administrator Login permission"
-$userObjectId = az ad user show --id $adminEmail --query objectId
+$userObjectId = az ad user show --id $adminEmail --query id
 az role assignment create `
 --assignee $userObjectId `
 --role "Virtual Machine Administrator Login" `
