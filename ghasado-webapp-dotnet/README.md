@@ -1,6 +1,8 @@
 # 🚀Getting Started
 Here are some steps to follow if you are a little bit unsure about how to create a basic .NET application and push the code to Azure DevOps. Enjoy!
 
+If not just navigate to the pipeline to see how you should install CodeQL on your hostad agents. You can also install it directly on the agent with cloud-init. If you want to check how it looks like you can click here!
+
 ## Create a .NET 7 web application
 ```powershell
 
