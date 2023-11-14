@@ -1,7 +1,8 @@
-# 🚀Getting Started
-Here are some steps to follow if you are a little bit unsure about how to create a basic .NET application and push the code to Azure DevOps. Enjoy!
+# Install CodeQL in Azure pipeline or VM scale set
+Navigate to the [pipeline](azure-pipelines.yaml) for guidance on installing CodeQL on your self-hosted agents. Additionally, you can install CodeQL directly on an Azure VM Scale Set using this [cloud-init script](../scripts/create-vmss/cloud-init.txt).
 
-If not just navigate to the [pipeline](azure-pipelines.yaml) to see how you should install CodeQL on your hostad agents. You can also install it directly on the agent with [cloud-init](). If you want to check how it looks like you can click here!
+## 🚀Getting Started
+Here are some steps to follow if you are a little bit unsure about how to create a basic .NET application and push the code to Azure DevOps. Enjoy!
 
 ## Create a .NET 7 web application
 ```powershell
