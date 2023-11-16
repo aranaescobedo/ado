@@ -1,0 +1,62 @@
+#cloud-config
+
+#Update all packages on first boot
+package_update: true
+package_upgrade: true
+
+#Install basic packages
+packages:
+  - htop
+  - git
+  - curl
+
+#Does not need to be used because of the extension AADSSHLoginForLinux!
+#Create default user and set up SSH keys.
+#users:
+#  - default
+#  - name: <username>
+#    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+#    groups: sudo
+#    shell: /bin/bash
+#    ssh-authorized-keys:
+#      - <your-ssh-public-key>
+
+#Run custom commands
+runcmd:
+  #Install Azure CLI
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+  # CodeQL Installation
+  - codeqlReleaseBundleTag="codeql-bundle-v2.15.1" 
+  - agentToolDirectory="/agent/_work/_tool"
+  - codeqlDirectory="$agentToolDirectory/CodeQL"
+  - codeqlVersionedDirectory="$codeqlDirectory/0.0.0-$codeqlReleaseBundleTag/x64"
+  - codeqlBundleTarGzPath="$agentToolDirectory/codeql-bundle.tar.gz"
+  - codeqlReleaseUrl="https://github.com/github/codeql-action/releases/download/$codeqlReleaseBundleTag/codeql-bundle-linux64.tar.gz"
+  - sudo mkdir -p $codeqlVersionedDirectory
+  - sudo wget $codeqlReleaseUrl -O $codeqlBundleTarGzPath
+  - sudo tar -xvzf $codeqlBundleTarGzPath -C $codeqlVersionedDirectory
+  - sudo touch $codeqlDirectory/0.0.0-$codeqlReleaseBundleTag/x64.complete
+
+  # Install Docker
+  - apt-get update
+  - apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io
+
+  # Enable Docker BuildKit
+  - echo '{"features":{"buildkit":true}}' > /etc/docker/daemon.json
+  - systemctl restart docker
+
+  # Install Docker Compose
+  - apt-get install -y docker-compose
+
+  # Install PowerShell Core
+  - apt-get install -y wget
+  - wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
+  - dpkg -i packages-microsoft-prod.deb
+  - apt-get update
+  - apt-get install -y powershell
+

@@ -35,6 +35,8 @@ param(
 $getRootDir = git rev-parse --show-toplevel
 Set-Location "$getRootDir\<FILE_PATH>" #The placeholder <FILE_PATH> represents the file path or directory where the script is located within your Git repository.
 
+$adminEmail = ""
+$appregistrationName = ""
 $extensionName = "AADSSHLoginForLinux"
 $resouceGroupName = ""
 $routeTableName = ""
@@ -58,10 +60,11 @@ az network vnet subnet create `
 az vmss create `
 --admin-username azureuser `
 --assign-identity `
+--custom-data cloud-init.txt `
 --disable-overprovision `
 --ephemeral-os-disk true `
 --generate-ssh-keys `
---image Ubuntu2204 `
+--image Canonical:0001-com-ubuntu-server-jammy:22_04-lts:latest `
 --instance-count 1 `
 --load-balancer '""' `
 --name $vmScaleName `
@@ -77,9 +80,34 @@ az vmss create `
 --vm-sku Standard_D4s_v3 `
 --vnet-name $vnetName
 
+"[*] Get VMSS ID"
+$vmssId = az vmss show `
+--name  $vmScaleName `
+--resource-group $resouceGroupName   `
+--query "id" -o tsv
+
+"[*] Give Admin user (email) Virtual Machine Administrator Login permission"
+$userObjectId = az ad user show --id $adminEmail --query id
+az role assignment create `
+--assignee $userObjectId `
+--role "Virtual Machine Administrator Login" `
+--scope $vmssId
+
+az role assignment create `
+--assignee $objectId `
+--role "Virtual Machine Contributor" `
+--scope $vmssId
+
 "[*] Install extension $extensionName"
 az vmss extension set `
 --name $extensionName `
 --publisher Microsoft.Azure.ActiveDirectory `
 --resource-group $resouceGroupName `
 --vmss-name $vmScaleName
+
+"[*] Give App registration Virtual Machine Contributor permission"
+$objectId = az ad sp list --display-name $appregistrationName --query "[].id" -o tsv
+az role assignment create `
+--assignee $objectId `
+--role "Virtual Machine Contributor" `
+--scope $vmssId
